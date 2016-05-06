@@ -211,8 +211,7 @@ public class CreateSurvey extends AppCompatActivity {
             Log.i("infoo","hasText for-loop starting");
             vintid++;
             vedit= (EditText) findViewById(vintid);
-//            if (vedit.getText().length() >0) {
-            if (vedit!=null) {
+            if (vedit.getText().length() >0) {
                 Log.i("infoo","hasText for-loop>if .length()>1 starting");
                 status = true;
 //                vintid++;

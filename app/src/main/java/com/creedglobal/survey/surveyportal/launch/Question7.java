@@ -82,8 +82,8 @@ public class Question7 extends AppCompatActivity {
 
     private void captureSelectedData(View viewid,int selectedOption){
         this.selectedOption=selectedOption;
-        Result.selectedOption[qid-1]=((TextView)viewid).getText().toString();
-        Result.selectedOptionNumber[qid-1]=selectedOption;
+        Result.selectedOption[qid]=((TextView)viewid).getText().toString();
+        Result.selectedOptionNumber[qid]=selectedOption;
     }
 
 

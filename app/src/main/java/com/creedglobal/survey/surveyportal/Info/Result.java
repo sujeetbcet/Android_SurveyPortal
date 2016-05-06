@@ -6,5 +6,5 @@ package com.creedglobal.survey.surveyportal.Info;
 public class Result {
     public static String[] selectedOption={"n/a","n/a", "n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a"};
 
-    public static int[] selectedOptionNumber={0,0,0,0,0,0,0,0,0,0};
+    public static int[] selectedOptionNumber={0,0,0,0,0,0,0,0,0,0,0};
 }

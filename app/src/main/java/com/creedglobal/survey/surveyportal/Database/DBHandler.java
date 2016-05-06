@@ -17,7 +17,7 @@ public class DBHandler extends SQLiteOpenHelper {
     String queryString;
 
     // Database Version
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 8;
     // Database Name
     private static final String DATABASE_NAME = "SurveyPortal.db";
     // Contacts table name
@@ -40,6 +40,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_Mobile = "mobile";
     private static final String KEY_Email = "email";
     private static final String KEY_Msg = "message";
+    private static final String KEY_Cust_Surveyname = "survey";
     private static final String KEY_Ques_1 = "question1";
     private static final String KEY_Ques_2 = "question2";
     private static final String KEY_Ques_3 = "question3";
@@ -75,6 +76,7 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_Mobile + " INTEGER,"
             + KEY_Email + " VARCHAR,"
             + KEY_Msg + " TEXT, "
+            + KEY_Cust_Surveyname + " TEXT,"
             + KEY_Ques_1 + " TEXT, "
             + KEY_Ques_2 + " TEXT, "
             + KEY_Ques_3 + " TEXT, "
@@ -98,7 +100,7 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_ADMIN_Temp_2 + " TEXT, "
             + KEY_ADMIN_Temp_3 + " TEXT, "
             + KEY_ADMIN_User_Type + " TEXT, "
-            + KEY_ADMIN_Token + "TEXT"
+            + KEY_ADMIN_Token + " TEXT"
             + ");";
 
 
@@ -189,20 +191,22 @@ public class DBHandler extends SQLiteOpenHelper {
         boolean status=false;
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
-        values.put(KEY_Ques_1,args[0]);
-        values.put(KEY_Ques_2,args[1]);
-        values.put(KEY_Ques_3,args[2]);
-        values.put(KEY_Ques_4,args[3]);
-        values.put(KEY_Ques_5,args[4]);
-        values.put(KEY_Ques_6,args[5]);
-        values.put(KEY_Ques_7,args[6]);
-        values.put(KEY_Ques_8,args[7]);
-        values.put(KEY_Ques_9,args[8]);
-        values.put(KEY_Ques_10,args[9]);
-        values.put(KEY_Username,args[10]);
-        values.put(KEY_Email,args[11]);
-        values.put(KEY_Mobile,args[12]);
-        values.put(KEY_Msg,args[13]);
+        values.put(KEY_Cust_Surveyname,args[0]);
+        values.put(KEY_Ques_1,args[1]);
+        values.put(KEY_Ques_2,args[2]);
+        values.put(KEY_Ques_3,args[3]);
+        values.put(KEY_Ques_4,args[4]);
+        values.put(KEY_Ques_5,args[5]);
+        values.put(KEY_Ques_6,args[6]);
+        values.put(KEY_Ques_7,args[7]);
+        values.put(KEY_Ques_8,args[8]);
+        values.put(KEY_Ques_9,args[9]);
+        values.put(KEY_Ques_10,args[10]);
+        values.put(KEY_Username,args[11]);
+        values.put(KEY_Email,args[12]);
+        values.put(KEY_Mobile,args[13]);
+        values.put(KEY_Msg,args[14]);
+
         db.insert(TABLE_NAME_CUSTOMER,null,values);
         db.close();
         status=true;

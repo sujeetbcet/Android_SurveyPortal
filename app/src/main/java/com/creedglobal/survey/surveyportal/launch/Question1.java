@@ -31,6 +31,7 @@ public class Question1 extends AppCompatActivity {
 
         selectedSurvey = getIntent().getStringExtra("TAG_selectedSurvey");
         totalquestion = getIntent().getIntExtra("TAG_totalquestion", 0);
+        Result.selectedOption[0]=selectedSurvey;
         qno = (TextView) findViewById(R.id.qid);
         question = (TextView) findViewById(R.id.question);
         opt1 = (TextView) findViewById(R.id.option1);
@@ -86,8 +87,8 @@ public class Question1 extends AppCompatActivity {
     }
     private void captureSelectedData(View viewid,int selectedOption){
         this.selectedOption=selectedOption;
-        Result.selectedOption[qid-1]=((TextView)viewid).getText().toString();
-        Result.selectedOptionNumber[qid-1]=selectedOption;
+        Result.selectedOption[qid]=((TextView)viewid).getText().toString();
+        Result.selectedOptionNumber[qid]=selectedOption;
     }
 
     public void onSelect(TextView selectedView) {

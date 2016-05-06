@@ -27,28 +27,28 @@ public class Submit extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId()==R.id.btn_submit){
-            Result.selectedOption[10]=name.getText().toString();
-            Result.selectedOption[11]=email.getText().toString();
-            Result.selectedOption[12]=mobile.getText().toString();
-            Result.selectedOption[13]=msg.getText().toString();
+            Result.selectedOption[11]=name.getText().toString();
+            Result.selectedOption[12]=email.getText().toString();
+            Result.selectedOption[13]=mobile.getText().toString();
+            Result.selectedOption[14]=msg.getText().toString();
             DBHandler db=new DBHandler(this);
             db.submitResult(Result.selectedOption);
             if (db.submitResult(Result.selectedOption))
             {
-                Toast.makeText(getApplicationContext(),"Your result is submitted Successfully",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Your result is === submitted Successfully",Toast.LENGTH_SHORT).show();
                 db.close();
             }
             else {
-                Toast.makeText(getApplicationContext(),"ops...! something went wrong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"ops...! something==== went wrong",Toast.LENGTH_SHORT).show();
             }
 
         }
     }
     public void submit(View view){
-        Result.selectedOption[10]=name.getText().toString();
-        Result.selectedOption[11]=email.getText().toString();
-        Result.selectedOption[12]=mobile.getText().toString();
-        Result.selectedOption[13]=msg.getText().toString();
+        Result.selectedOption[11]=name.getText().toString();
+        Result.selectedOption[12]=email.getText().toString();
+        Result.selectedOption[13]=mobile.getText().toString();
+        Result.selectedOption[14]=msg.getText().toString();
         Log.i("infoo","value in array is :"+Result.selectedOption);
         DBHandler db=new DBHandler(this);
         if (db.submitResult(Result.selectedOption))
