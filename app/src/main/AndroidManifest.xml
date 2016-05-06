@@ -69,7 +69,6 @@
             android:name=".MainScreen"
             android:label="@string/title_activity_main_screen"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".Support"
             android:label="@string/title_activity_support"
@@ -77,7 +76,12 @@
         <activity android:name=".launch.Question7" />
         <activity android:name=".launch.Question8" />
         <activity android:name=".launch.Question9" />
-        <activity android:name=".launch.Question10"></activity>
+        <activity android:name=".launch.Question10" />
+        <activity android:name=".launch.SinglePageSurvey" />
+        <activity
+            android:name=".launch.SurveyScreenActivity"
+            android:label="@string/title_activity_survey_screen"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

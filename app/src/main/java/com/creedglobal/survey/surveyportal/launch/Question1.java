@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.creedglobal.survey.surveyportal.Database.DBHandler;
 import com.creedglobal.survey.surveyportal.Info.Constraints;
 import com.creedglobal.survey.surveyportal.Info.Result;
-import com.creedglobal.survey.surveyportal.MainScreen;
 import com.creedglobal.survey.surveyportal.R;
 
 public class Question1 extends AppCompatActivity {
@@ -66,8 +65,6 @@ public class Question1 extends AppCompatActivity {
     }
 
     public void saveAndNext(View view) {
-//        Result.selectedOption=null;
-//        Result.selectedOptionNumber=null;
         if (view.getId() == R.id.option1) {
             captureSelectedData(view,1);
             onSelect(opt1);

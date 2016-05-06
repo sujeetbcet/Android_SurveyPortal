@@ -48,5 +48,6 @@
     <string name="website">Website :</string>
     <string name="com_web_add">www.creedglobal.com</string>
     <string name="title_activity_support">Support</string>
+    <string name="title_activity_survey_screen">SurveyScreenActivity</string>
 
 </resources>

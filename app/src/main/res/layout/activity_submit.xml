@@ -19,7 +19,7 @@
         android:layout_centerHorizontal="true"
         android:background="@android:drawable/editbox_background_normal"
         android:layout_marginTop="5dp"
-        android:hint="full name" />
+        android:hint="Full name" />
 
     <EditText
         android:layout_width="match_parent"
@@ -43,7 +43,8 @@
         android:layout_centerHorizontal="true"
         android:background="@android:drawable/editbox_background_normal"
         android:layout_marginTop="5dp"
-        android:hint="mobile number" />
+        android:hint="10-digits mobile"
+        android:maxLength="10" />
 
     <EditText
         android:layout_width="match_parent"
