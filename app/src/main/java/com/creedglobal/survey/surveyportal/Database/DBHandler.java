@@ -19,7 +19,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 8;
     // Database Name
-    private static final String DATABASE_NAME = "SurveyPortal.db";
+    public static final String DATABASE_NAME = "SurveyPortal.db";
     // Contacts table name
     public static final String TABLE_NAME_SURVEY = "Survey";         // to store data when user create a survey
     public static final String TABLE_NAME_USER = "Survey_user";     //  to store user details when signup/edit
@@ -36,8 +36,8 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_RESPONSE_4 = "option_4";
 
     //Survey_customer table columns
-    private static final String KEY_Username = "username";      // to Capture Full Name
-    private static final String KEY_Mobile = "mobile";
+    public static final String KEY_Username = "username";      // to Capture Full Name
+    public static final String KEY_Mobile = "mobile";
     private static final String KEY_Email = "email";
     private static final String KEY_Msg = "message";
     private static final String KEY_Cust_Surveyname = "survey";
@@ -614,6 +614,47 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.close();
         return status;
+    }
+    public List<SurveyResponse> getSurveyResults(String surveyName){
+        List<SurveyResponse> responseDataList = new ArrayList<SurveyResponse>();
+        queryString="select * from "+TABLE_NAME_CUSTOMER+" where "+KEY_Cust_Surveyname+"=\""+surveyName+"\"";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString,null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                SurveyResponse response = new SurveyResponse();
+                response.setUsername(cursor.getString(0));
+                response.setMobile(cursor.getString(1));
+                response.setEmail(cursor.getString(2));
+                response.setComments(cursor.getString(3));
+                response.setSurveyname(cursor.getString(4));
+                response.setResponse1(cursor.getString(5));
+                response.setResponse2(cursor.getString(6));
+                response.setResponse3(cursor.getString(7));
+                response.setResponse4(cursor.getString(8));
+                response.setResponse5(cursor.getString(9));
+                response.setResponse6(cursor.getString(10));
+                response.setResponse7(cursor.getString(11));
+                response.setResponse8(cursor.getString(12));
+                response.setResponse9(cursor.getString(13));
+                response.setResponse10(cursor.getString(14));
+                // Adding contact to list
+                responseDataList.add(response);
+                Log.i("infoo",""+responseDataList.get(0).toString());
+            }
+            while (cursor.moveToNext());
+            Log.i("my_info: ","getSurveyResults()>DBHandler. do-while-loop all data");
+        }
+        return responseDataList;
+    }
+
+    public Cursor getResult(String surveyname){
+        queryString="select * from "+TABLE_NAME_CUSTOMER+" where "+KEY_Cust_Surveyname+"=\""+surveyname+"\"";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString,null);
+        return cursor;
     }
 
 }

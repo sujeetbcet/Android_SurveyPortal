@@ -5,7 +5,7 @@ package com.creedglobal.survey.surveyportal.Database;
  */
 public class Details_user {
 
-String username;
+    String username;
     String mobile_no;
     String email;
     String msg;

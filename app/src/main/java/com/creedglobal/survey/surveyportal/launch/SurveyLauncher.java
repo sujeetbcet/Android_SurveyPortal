@@ -31,7 +31,11 @@ public class SurveyLauncher extends AppCompatActivity {
         setContentView(R.layout.activity_survey_launcher);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-//        setSupportActionBar(toolbar);
+        if (db!=null){
+            if(cursor!=null)
+                cursor.close();
+            db.close();
+        }
         lv= (ListView) findViewById(R.id.listView);
         db = new DBHandler(this);
         cursor=db.getAllSurvey();

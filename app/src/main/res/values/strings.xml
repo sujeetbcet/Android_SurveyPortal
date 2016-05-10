@@ -19,6 +19,7 @@
     <string name="already_register_login">Already register ?<u>Login</u></string>
     <string name="title_activity_survey_launcher">SurveyLauncher</string>
     <string name="sign_up">Sign Up</string>
+    <string name="sign_out">Sign Out</string>
 
 
     <string name="textview1">Welcome!</string>
@@ -49,5 +50,8 @@
     <string name="com_web_add">www.creedglobal.com</string>
     <string name="title_activity_support">Support</string>
     <string name="title_activity_survey_screen">SurveyScreenActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

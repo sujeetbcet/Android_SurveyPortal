@@ -3,6 +3,7 @@ package com.creedglobal.survey.surveyportal.Create;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -30,12 +31,13 @@ public class CreateSurvey extends AppCompatActivity {
     String surveyName = null;
     int qid = 0, maxq = 5, minq = Constraints.minq, vintid = 1;
     String question, opt1, opt2, opt3, opt4, opt5;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_survey);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mContainerView = (ViewGroup) findViewById(R.id.container);
         surveyname_edit = (EditText) findViewById(R.id.surveyname_edit);
@@ -64,7 +66,9 @@ public class CreateSurvey extends AppCompatActivity {
                     addItem();
 
                 } else {
-                    Toast.makeText(this, "You cannot add more questions", Toast.LENGTH_LONG).show();
+                    Snackbar.make(toolbar, "You cannot add more questions", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+//                    Toast.makeText(this, "You cannot add more questions", Toast.LENGTH_LONG).show();
                 }
                 return true;
         }
@@ -76,7 +80,7 @@ public class CreateSurvey extends AppCompatActivity {
         if (surveyname_edit.getText().length() > 2) {
             if (hasTex(q)){
                 // Instantiate a new "row" view.
-                final ViewGroup newView = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.list_item_example, mContainerView, false);
+                final ViewGroup newView = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.list_item_addquestion, mContainerView, false);
                 qid_text = (TextView) newView.findViewById(R.id.qidtxt);
                 question_edit = (EditText) newView.findViewById(R.id.editText4);
                 question_edit.requestFocus();
@@ -103,43 +107,6 @@ public class CreateSurvey extends AppCompatActivity {
             surveyname_edit.setError("please enter valid survey name !");
         }
 
-
-//        surveyName = surveyname_edit.getText().toString();
-//        if (surveyName.length() < 2||surveyName.isEmpty()) {
-//            surveyname_edit.setError("please enter valid survey name");
-//        }
-//        else {
-
-//            // Instantiate a new "row" view.
-//            final ViewGroup newView = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.list_item_example, mContainerView, false);
-//            qid_text = (TextView) newView.findViewById(R.id.qidtxt);
-//            question_edit = (EditText) newView.findViewById(R.id.editText4);
-//            question_edit.requestFocus();
-//            opt1_edit = (EditText) newView.findViewById(R.id.editText5);
-//            opt2_edit = (EditText) newView.findViewById(R.id.editText6);
-//            opt3_edit = (EditText) newView.findViewById(R.id.editText7);
-//            opt4_edit = (EditText) newView.findViewById(R.id.editText8);
-//
-//            // setting id to all view at run time and generating "Question no." i.e. "qid"
-//            qid_text.setText("Question " + ++qid + ".");
-//
-//            question_edit.setId(++q);
-//            opt1_edit.setId(++q);
-//            opt2_edit.setId(++q);
-//            opt3_edit.setId(++q);
-//            opt4_edit.setId(++q);
-//
-////        Log.i("infoo",edit1.getText().toString());
-////            Log.i("infoo", "qid " + (qid));
-////            Log.i("infoo", "question id " + question_edit.getId());
-////            Log.i("infoo", "option1 id " + opt1_edit.getId());
-////            Log.i("infoo", "option2 id " + opt2_edit.getId());
-////            Log.i("infoo", "option3 id " + opt3_edit.getId());
-////            Log.i("infoo", "option4 id " + opt4_edit.getId());
-////            Log.i("y",""+opt4_edit.getText().toString());
-//
-//            // Adding view to view to container.  i.e. adding "list_item_example.xml" >>> "R.id.container"
-//            mContainerView.addView(newView, 0);
     }
 
     public void done(View view) {
@@ -149,7 +116,9 @@ public class CreateSurvey extends AppCompatActivity {
 //            view.setClickable(false);
 
             if (qid < minq) {
-                Toast.makeText(this, "please add atleast 3 questions", Toast.LENGTH_LONG).show();
+                Snackbar.make(view, "please add atleast 3 questions", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+//                Toast.makeText(this, "please add atleast 3 questions", Toast.LENGTH_LONG).show();
             } else {
                 surveyName = surveyname_edit.getText().toString().toLowerCase();
 
@@ -190,7 +159,10 @@ public class CreateSurvey extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(),SurveyLauncher.class));
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"survey is not created successfully",Toast.LENGTH_SHORT).show();
+
+                    Snackbar.make(view, "survey not created...!", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+//                    Toast.makeText(getApplicationContext(),"survey is not created successfully",Toast.LENGTH_SHORT).show();
                 }
             }
         }

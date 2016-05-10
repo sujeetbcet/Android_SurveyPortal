@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/user"
+        android:id="@+id/txt_username"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:textStyle="bold"
         android:textColor="@color/SeaGreen"
@@ -29,7 +29,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txt_useremail"
         android:textColor="@color/SeaGreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
