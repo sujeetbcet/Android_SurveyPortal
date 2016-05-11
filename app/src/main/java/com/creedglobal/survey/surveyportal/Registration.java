@@ -81,4 +81,11 @@ public class Registration extends AppCompatActivity {
         }
         return valid;
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        finish();
+//        super.onBackPressed();
+    }
 }

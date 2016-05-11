@@ -66,6 +66,7 @@ public class MainScreen extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+
             super.onBackPressed();
         }
     }
@@ -170,4 +171,6 @@ public class MainScreen extends AppCompatActivity
     public void gotoCreateSurvey(View view){
         startActivity(new Intent(this,CreateSurvey.class));
     }
+
+
 }

@@ -17,5 +17,5 @@
         android:textColor="#000000"
         android:textSize="25sp"
 
-        android:background="@color/AntiqueWhite" />
+        android:gravity="center_horizontal" />
 </LinearLayout>
