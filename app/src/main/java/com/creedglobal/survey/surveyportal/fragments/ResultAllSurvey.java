@@ -48,8 +48,7 @@ public class ResultAllSurvey extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.i("infoo","Fragment_onCreateView is alled...");
-        TextView title= (TextView) container.findViewById(R.id.txt_survey_title);
-        title.setText("Results...");
+
         rootView = inflater.inflate(R.layout.fragment_resultallsurvey,container,false);
         lv= (ListView) rootView.findViewById(R.id.list_result);
         if (cursor!=null){
@@ -80,6 +79,7 @@ public class ResultAllSurvey extends Fragment {
 
         return rootView;
     }
+
 
 
     @Override
