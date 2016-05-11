@@ -17,6 +17,7 @@ import android.widget.ViewFlipper;
 
 
 import com.creedglobal.survey.surveyportal.Database.DBHandler;
+import com.creedglobal.survey.surveyportal.Info.Data;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -31,8 +32,6 @@ import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity {
 
-    CallbackManager callbackManager;
-    LoginButton loginButton;
     DBHandler db;
     Profile profile;
     EditText edt_usr,edt_pwd;
@@ -51,12 +50,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db=new DBHandler(this);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
-        AppEventsLogger.activateApp(this);
+        FacebookSdk.isInitialized();
         setContentView(R.layout.activity_main);
         edt_usr= (EditText) findViewById(R.id.edt_username);
         edt_pwd= (EditText) findViewById(R.id.edt_password);
-        loginButton = (LoginButton) findViewById(R.id.login_button);
+//        loginButton = (LoginButton) findViewById(R.id.login_button);
         flipper = (ViewFlipper) findViewById(R.id.viewFlipper);
         if (loginStatus = false) {
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
@@ -74,53 +72,7 @@ public class MainActivity extends AppCompatActivity {
 //            flipper.setOutAnimation(this, android.R.anim.fade_out);
             flipper.setAutoStart(true);
             flipper.setFlipInterval(2000);
-
-            // Facebook login integration
-            loginButton.setReadPermissions("email", "user_friends");
-            callbackManager = CallbackManager.Factory.create();
-            loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                @Override
-                public void onSuccess(LoginResult loginResult) {
-                    Log.i("my_info", "Login Success");
-                    Log.i("my_info", "userid =>" + loginResult.getAccessToken().getUserId());
-                    profile = Profile.getCurrentProfile();
-                    String name = profile.getFirstName();
-                    Log.i("my_info", "Name :" + name);
-                    startActivity(new Intent(getApplicationContext(), MainScreen.class));
-                }
-                @Override
-                public void onCancel() {
-                    Log.i("my_info", "Login Cancel");
-                }
-                @Override
-                public void onError(FacebookException error) {
-                    Log.i("my_info", "Login Error");
-                }
-            });
-//            End of facebook integration.
-
-            // to print the hash key for facebook purpose
-            try {
-                PackageInfo info = getPackageManager().getPackageInfo("com.facebook.samples.loginhowto", PackageManager.GET_SIGNATURES);
-                for (Signature signature : info.signatures) {
-                    MessageDigest md = MessageDigest.getInstance("SHA");
-                    md.update(signature.toByteArray());
-                    Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-
-            } catch (NoSuchAlgorithmException e) {
-
-            }
-            // end of hash key
         }
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
 
@@ -136,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         username=edt_usr.getText().toString();
         password=edt_pwd.getText().toString();
         if (db.checkLogin(username,password)){
+            Data.username=username;
+            Data.email=username;
             Log.i("infoo","Login Success");
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
 

@@ -9,4 +9,5 @@ public interface Constraints {
 
     // This define the timeout to appear the next question after user select any option.
     public static final long delayTimeOut=500;
+    public static final long splashScreenTimeOut=500;
 }

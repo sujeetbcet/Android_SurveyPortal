@@ -2,7 +2,9 @@ package com.creedglobal.survey.surveyportal;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -14,10 +16,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.creedglobal.survey.surveyportal.Create.CreateSurvey;
+import com.creedglobal.survey.surveyportal.fragments.About;
+import com.creedglobal.survey.surveyportal.fragments.Feedback;
 import com.creedglobal.survey.surveyportal.fragments.Home;
 import com.creedglobal.survey.surveyportal.fragments.ResultAllSurvey;
+import com.creedglobal.survey.surveyportal.fragments.Setting;
+import com.creedglobal.survey.surveyportal.fragments.Support;
+import com.creedglobal.survey.surveyportal.fragments.Sync;
 import com.creedglobal.survey.surveyportal.launch.SurveyLauncher;
 
 public class MainScreen extends AppCompatActivity
@@ -31,6 +40,7 @@ public class MainScreen extends AppCompatActivity
         setContentView(R.layout.activity_main_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         // Handle the Home action
         Home frag = new Home();
         manager = getFragmentManager();
@@ -47,6 +57,7 @@ public class MainScreen extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -64,6 +75,7 @@ public class MainScreen extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
@@ -76,8 +88,22 @@ public class MainScreen extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            transaction = manager.beginTransaction();
+            transaction.replace(R.id.fragmentcontainer,new Setting());
+            transaction.commit();
             return true;
         }
+        if  (id == R.id.action_logout) {
+            SharedPreferences pref = MainScreen.this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            Toast.makeText(MainScreen.this, "Logout", Toast.LENGTH_SHORT).show();
+            editor.clear();
+            editor.commit();
+            MainScreen.this.finish();
+            return true;
+        }
+
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -103,11 +129,15 @@ public class MainScreen extends AppCompatActivity
             transaction.commit();
 
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_sync) {
+        }  else if (id == R.id.nav_sync) {
+            transaction = manager.beginTransaction();
+            transaction.replace(R.id.fragmentcontainer,new Sync());
+            transaction.commit();
 
         } else if (id == R.id.nav_about) {
+            transaction = manager.beginTransaction();
+            transaction.replace(R.id.fragmentcontainer,new About());
+            transaction.commit();
 
         } else if (id == R.id.nav_share) {
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
@@ -122,9 +152,15 @@ public class MainScreen extends AppCompatActivity
             i.setData(Uri.parse(url));
             startActivity(i);
         } else if (id == R.id.nav_feed) {
+            transaction = manager.beginTransaction();
+            transaction.replace(R.id.fragmentcontainer,new Feedback());
+            transaction.commit();
 
         } else if (id == R.id.nav_help) {
-            startActivity(new Intent(getApplicationContext(), Support.class));
+            transaction = manager.beginTransaction();
+            transaction.replace(R.id.fragmentcontainer,new Support());
+            transaction.commit();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

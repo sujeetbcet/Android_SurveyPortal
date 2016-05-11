@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.creedglobal.survey.surveyportal.Database.DBHandler;
@@ -37,6 +38,7 @@ public class ResultAllSurvey extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("infoo","Fragment_onCreate is called");
+
         db=new DBHandler(getActivity());
         cursor=db.getAllSurvey();
 
@@ -46,6 +48,8 @@ public class ResultAllSurvey extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.i("infoo","Fragment_onCreateView is alled...");
+        TextView title= (TextView) container.findViewById(R.id.txt_survey_title);
+        title.setText("Results...");
         rootView = inflater.inflate(R.layout.fragment_resultallsurvey,container,false);
         lv= (ListView) rootView.findViewById(R.id.list_result);
         if (cursor!=null){

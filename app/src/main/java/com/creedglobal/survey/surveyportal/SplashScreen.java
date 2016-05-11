@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
+import com.creedglobal.survey.surveyportal.Info.Constraints;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
@@ -16,14 +17,12 @@ import com.facebook.Profile;
 
 public class SplashScreen extends Activity {
 
-    private static final int SPLASH_TIME_OUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
         FacebookSdk.sdkInitialize(getApplicationContext());
-//        Log.i("my_info","access token"+AccessToken.getCurrentAccessToken());
         new Handler().postDelayed(new Runnable() {
 
             /*
@@ -35,7 +34,7 @@ public class SplashScreen extends Activity {
             @Override
             public void run() {
 
-                if (AccessToken.getCurrentAccessToken()!=null) {
+                if (AccessToken.getCurrentAccessToken() != null) {
                     Profile profile = Profile.getCurrentProfile();
                     Log.i("my_info", "user name" + profile.getName());
 
@@ -44,14 +43,13 @@ public class SplashScreen extends Activity {
                     Intent i = new Intent(getApplicationContext(), MainScreen.class);
                     startActivity(i);
 
-                }
-                else {
+                } else {
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(i);
                 }
                 finish();
 
             }
-        }, SPLASH_TIME_OUT);
+        }, Constraints.splashScreenTimeOut);
     }
-    }
+}

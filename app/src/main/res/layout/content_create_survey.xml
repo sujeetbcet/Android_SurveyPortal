@@ -42,19 +42,11 @@
                 android:layout_height="wrap_content"
                 android:text="To Add question to this Survey Click on +"
                 android:id="@+id/textView99"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/Chocolate"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>
-    <!--<Button-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:id="@+id/save"-->
-    <!--android:gravity="bottom|left"-->
-    <!--android:background="#24b2eb"-->
-    <!--android:text="@string/button0"-->
-    <!--android:textSize="25sp"-->
-    <!--android:textColor="@color/Black"/>-->
+
 </FrameLayout>

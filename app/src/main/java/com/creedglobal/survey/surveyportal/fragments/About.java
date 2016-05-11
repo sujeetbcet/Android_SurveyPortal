@@ -1,20 +1,25 @@
 package com.creedglobal.survey.surveyportal.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.creedglobal.survey.surveyportal.R;
 
-/**
- * Created by SUJEET on 5/11/2016.
- */
-public class SurveyTemplate_1 extends Fragment{
-    View rootView;
+import java.util.regex.Pattern;
+
+public class About extends Fragment {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,15 +28,11 @@ public class SurveyTemplate_1 extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.survey_template_1,container,false);
-        TextView textView = new TextView(getActivity());
-        textView.setText("Question will display here...?");
-        container.addView(textView);
+        View rootView=inflater.inflate(R.layout.fragment_home,container,false);
+
+
+        // Inflate the layout for this fragment
         return rootView;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
 }
