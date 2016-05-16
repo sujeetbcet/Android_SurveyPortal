@@ -1,5 +1,6 @@
 package com.creedglobal.survey.surveyportal.fragments;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.creedglobal.survey.surveyportal.MainScreen;
 import com.creedglobal.survey.surveyportal.R;
 
 /**
@@ -17,6 +19,8 @@ public class Setting extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings,container,false);
+
+        ((MainScreen) getActivity()).getSupportActionBar().setTitle("Settings");
         return rootView;
     }
 }

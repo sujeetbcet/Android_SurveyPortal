@@ -60,7 +60,8 @@
         <activity
             android:name=".launch.SurveyLauncher"
             android:label="@string/title_activity_survey_launcher"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            />
         <activity android:name=".launch.Question2" />
         <activity android:name=".launch.Question3" />
         <activity android:name=".launch.Question4" />
@@ -71,10 +72,10 @@
             android:name=".MainScreen"
             android:label="@string/title_activity_main_screen"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".fragments.Support"
-            android:label="@string/title_activity_support"
-            android:theme="@style/AppTheme" />
+        <!--<activity-->
+            <!--android:name=".fragments.Support"-->
+            <!--android:label="@string/title_activity_support"-->
+            <!--android:theme="@style/AppTheme" />-->
         <activity android:name=".launch.Question7" />
         <activity android:name=".launch.Question8" />
         <activity android:name=".launch.Question9" />

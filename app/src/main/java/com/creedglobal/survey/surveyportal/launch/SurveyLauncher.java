@@ -1,5 +1,6 @@
 package com.creedglobal.survey.surveyportal.launch;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.creedglobal.survey.surveyportal.Database.DBHandler;
+import com.creedglobal.survey.surveyportal.MainScreen;
 import com.creedglobal.survey.surveyportal.R;
 
 public class SurveyLauncher extends AppCompatActivity {
@@ -29,7 +31,6 @@ public class SurveyLauncher extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_launcher);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         if (db!=null){
             if(cursor!=null)
@@ -67,14 +68,14 @@ public class SurveyLauncher extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
     }
     public void startSurvey(View view){
         Intent i=new Intent(this,Question1.class);

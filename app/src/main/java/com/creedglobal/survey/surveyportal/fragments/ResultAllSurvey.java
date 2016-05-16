@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.creedglobal.survey.surveyportal.Database.DBHandler;
+import com.creedglobal.survey.surveyportal.MainScreen;
 import com.creedglobal.survey.surveyportal.R;
 import com.creedglobal.survey.surveyportal.extra.DisplaySurveyResponse;
 import com.creedglobal.survey.surveyportal.launch.Question1;
@@ -50,6 +51,7 @@ public class ResultAllSurvey extends Fragment {
         Log.i("infoo","Fragment_onCreateView is alled...");
 
         rootView = inflater.inflate(R.layout.fragment_resultallsurvey,container,false);
+        ((MainScreen) getActivity()).getSupportActionBar().setTitle("Result");
         lv= (ListView) rootView.findViewById(R.id.list_result);
         if (cursor!=null){
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),

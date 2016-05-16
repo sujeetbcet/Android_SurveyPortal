@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.creedglobal.survey.surveyportal.MainScreen;
 import com.creedglobal.survey.surveyportal.R;
 
 import java.util.regex.Pattern;
@@ -31,6 +32,7 @@ public class Sync extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView=inflater.inflate(R.layout.fragment_support,container,false);
+        ((MainScreen) getActivity()).getSupportActionBar().setTitle("Sync");
         ImageView twitter =(ImageView)rootView.findViewById(R.id.twitter);
         ImageView linkedin =(ImageView)rootView.findViewById(R.id.linkedin);
         ImageView facebook =(ImageView)rootView.findViewById(R.id.facebook);
