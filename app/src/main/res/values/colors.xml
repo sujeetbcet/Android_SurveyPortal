@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4172d2</color>
-    <color name="colorPrimaryDark">#ee152594</color>
+    <color name="colorPrimary">#41a8b6</color>
+    <color name="colorPrimaryDark">#0c8395</color>
     <color name="white">#ffffff</color>
+    <color name="fbprimary">#6593f0</color>
+    <color name="fbprimarydark">#2b5bba</color>
     <color name="colorAccent">#FF4081</color>
     <color name="selected">#c8f1088c</color>
     <color name="unselected">#70000000</color>
-    <color name="background">#c8a6ced2</color>
+    <color name="background">#b3a6ced2</color>
     <color name="actionbar">#76c5cc</color>
     <color name="background1">#80D8FF</color>
     <color name="actionbar1">#40C4FF</color>

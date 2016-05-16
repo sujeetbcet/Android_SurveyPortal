@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ques"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@drawable/questionback"
     tools:context="com.creedglobal.survey.surveyportal.launch.Question1">
 
     <LinearLayout
@@ -11,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp">
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/questionbox">
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,13 +32,15 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="What is your Question ?"
             android:id="@+id/question"
-            android:textColor="@color/DarkCyan" />
+            android:textColor="@color/unselected"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout3">

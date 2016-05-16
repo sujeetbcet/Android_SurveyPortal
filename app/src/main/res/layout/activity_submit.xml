@@ -16,9 +16,10 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50sp"
-        android:inputType="textPersonName"
+        android:inputType="text|textPersonName"
         android:layout_below="@+id/toolbar"
         android:ems="10"
+
         android:id="@+id/edt_customer_name"
         android:layout_centerHorizontal="true"
         android:background="@android:drawable/editbox_background_normal"

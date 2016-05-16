@@ -2,9 +2,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
     <gradient
-        android:startColor="@color/actionbar"
-        android:centerColor="@color/DeepSkyBlue"
-        android:endColor="@color/DarkCyan"
+        android:startColor="@color/colorPrimary"
+        android:centerColor="@color/colorPrimary"
+        android:endColor="@color/colorPrimaryDark"
         android:angle="270"/>
-    <corners android:radius="5dp" />
+    <corners android:radius="0dp" />
 </shape>

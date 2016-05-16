@@ -1,5 +1,6 @@
 package com.creedglobal.survey.surveyportal.launch;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class Submit extends AppCompatActivity {
             {
                 Toast.makeText(getApplicationContext(),"Your result is submitted Successfully",Toast.LENGTH_SHORT).show();
                 db.close();
+                startActivity(new Intent(getApplicationContext(),SurveyLauncher.class));
             }
             else {
                 Toast.makeText(getApplicationContext(),"ops...! something went wrong",Toast.LENGTH_SHORT).show();
