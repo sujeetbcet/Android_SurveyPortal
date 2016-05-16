@@ -1,5 +1,7 @@
 package com.creedglobal.survey.surveyportal.Database;
 
+import android.util.Log;
+
 /**
  * Created by SUJEET on 5/16/2016.
  */
@@ -106,11 +108,20 @@ public class UserAdmin {
     }
 
     public String getAddress() {
-        address=(getStreet()!=null)?getStreet():"";
-        address=(getCity()!=null)?address+"\n"+getCity():address;
-        address=(getState()!=null)?address+"\n"+getState():address;
-        address=(getPincode()!=null)?address+"\n"+getPincode():address;
-        return address;
+        if (address!=null)
+        {
+            Log.i("infoo",address);
+            return address;
+        }
+        else {
+            address = (getStreet() != null) ? getStreet() : "";
+            address = (getCity() != null) ? address + "\n" + getCity() : address;
+            address = (getState() != null) ? address + "\n" + getState() : address;
+            address = (getPincode() != null) ? address + "\n" + getPincode() : address;
+            Log.i("infoo",address);
+            return address;
+        }
+
     }
 
     public void setAddress(String address) {

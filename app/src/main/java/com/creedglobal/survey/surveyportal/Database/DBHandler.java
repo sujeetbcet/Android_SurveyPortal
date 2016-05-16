@@ -656,6 +656,7 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(queryString,null);
         return cursor;
     }
+    // call this method to get admin profile details
     public UserAdmin getUserAdminDetail(String email){
         UserAdmin detail = new UserAdmin();
         queryString="select * from "+TABLE_NAME_USER+" where "+KEY_ADMIN_Email_id+"=\""+email+"\"";
@@ -666,6 +667,7 @@ public class DBHandler extends SQLiteOpenHelper {
             detail.setMobile(cursor.getString(1));
             detail.setEmail(cursor.getString(2));
             detail.setOccupation(cursor.getString(3));
+            detail.setAddress(cursor.getString(5));
             detail.setUserType(cursor.getString(7));
         }
         if (cursor!=null)
@@ -674,8 +676,25 @@ public class DBHandler extends SQLiteOpenHelper {
             db.close();
         return detail;
     }
+
+    // call this mehod to update admin profile details
+    public boolean UpdateUserAdminDetail(UserAdmin detail){
+
+        boolean status=false;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues value = new ContentValues();
+        value.put(KEY_ADMIN_NAME,detail.getName());
+        value.put(KEY_ADMIN_Mobile_nos,detail.getMobile());
+        value.put(KEY_ADMIN_Occupation,detail.getOccupation());
+        value.put(KEY_ADMIN_Temp_2,detail.getAddress());
+        if (db.update(TABLE_NAME_USER,value,KEY_ADMIN_Email_id+"=?", new String[]{detail.getEmail()})>0)
+            status=true;
+        closeResource(db,null);
+        return status;
+    }
+
     // it will close all open resource(if Opened), Call at the last of every method.
-    public void closeResource(DBHandler db,Cursor cursor){
+    public void closeResource(SQLiteDatabase db,Cursor cursor){
         if (cursor!=null)
             cursor.close();
         if (db!=null)

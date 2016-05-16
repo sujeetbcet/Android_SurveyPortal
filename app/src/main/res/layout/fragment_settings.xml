@@ -147,7 +147,7 @@
                     android:layout_weight="0.7"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_height="wrap_content"
-                    android:text="ADD ADDRESS "/>
+                    android:text="ADDRESS "/>
                 <EditText
                     android:id="@+id/edt_address"
                     android:layout_width="match_parent"
