@@ -46,8 +46,6 @@ public class MainScreen extends AppCompatActivity
         // Handle the Home action
         Home frag = new Home();
         manager = getFragmentManager();
-//        manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
-
         transaction = manager.beginTransaction();
         transaction.add(R.id.fragmentcontainer,frag,"home_fragment");
         transaction.commit();
@@ -110,7 +108,7 @@ public class MainScreen extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-//            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new Setting());
             transaction.commit();
@@ -126,8 +124,6 @@ public class MainScreen extends AppCompatActivity
             return true;
         }
 
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -140,6 +136,7 @@ public class MainScreen extends AppCompatActivity
 
         if (id == R.id.nav_home) {
 //            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new Home());
             transaction.commit();
@@ -149,19 +146,22 @@ public class MainScreen extends AppCompatActivity
 
         } else if (id == R.id.nav_results) {
 //            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new ResultAllSurvey());
             transaction.commit();
 
 
         }  else if (id == R.id.nav_sync) {
-            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+//            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new Sync());
             transaction.commit();
 
         } else if (id == R.id.nav_about) {
-            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+//            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new About());
             transaction.commit();
@@ -179,13 +179,13 @@ public class MainScreen extends AppCompatActivity
             i.setData(Uri.parse(url));
             startActivity(i);
         } else if (id == R.id.nav_feed) {
-            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new Feedback());
             transaction.commit();
 
         } else if (id == R.id.nav_help) {
-            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new Support());
             transaction.commit();
@@ -196,6 +196,7 @@ public class MainScreen extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    
     public void gotoCreateSurvey(View view){
         startActivity(new Intent(this,CreateSurvey.class));
     }
