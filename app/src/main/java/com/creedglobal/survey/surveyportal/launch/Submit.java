@@ -15,6 +15,9 @@ import com.creedglobal.survey.surveyportal.R;
 
 import java.util.Arrays;
 
+//
+
+
 public class Submit extends AppCompatActivity {
     EditText edt_name,edt_email, edt_mobile, edt_msg;
 
@@ -64,4 +67,7 @@ public class Submit extends AppCompatActivity {
         }
         return valid;
     }
+
+    // AsyncTask for sending mail to customer
+    
 }
