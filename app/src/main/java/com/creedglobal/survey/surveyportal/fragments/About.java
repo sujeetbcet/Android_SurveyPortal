@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.creedglobal.survey.surveyportal.MainScreen;
 import com.creedglobal.survey.surveyportal.R;
 
 import java.util.regex.Pattern;
@@ -29,6 +30,7 @@ public class About extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView=inflater.inflate(R.layout.fragment_home,container,false);
+        ((MainScreen) getActivity()).getSupportActionBar().setTitle("About");
 
 
         // Inflate the layout for this fragment
