@@ -99,7 +99,7 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_ADMIN_Password + " TEXT, "
             + KEY_ADMIN_Temp_2 + " TEXT, "
             + KEY_ADMIN_Temp_3 + " TEXT, "
-            + KEY_ADMIN_User_Type + " TEXT, "
+            + KEY_ADMIN_User_Type + " TEXT DEFAULT 'guest', "
             + KEY_ADMIN_Token + " TEXT"
             + ");";
 
@@ -656,5 +656,29 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(queryString,null);
         return cursor;
     }
-
+    public UserAdmin getUserAdminDetail(String email){
+        UserAdmin detail = new UserAdmin();
+        queryString="select * from "+TABLE_NAME_USER+" where "+KEY_ADMIN_Email_id+"=\""+email+"\"";
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString,null);
+        if (cursor.moveToFirst()){
+            detail.setName(cursor.getString(0));
+            detail.setMobile(cursor.getString(1));
+            detail.setEmail(cursor.getString(2));
+            detail.setOccupation(cursor.getString(3));
+            detail.setUserType(cursor.getString(7));
+        }
+        if (cursor!=null)
+            cursor.close();
+        if (db!=null)
+            db.close();
+        return detail;
+    }
+    // it will close all open resource(if Opened), Call at the last of every method.
+    public void closeResource(DBHandler db,Cursor cursor){
+        if (cursor!=null)
+            cursor.close();
+        if (db!=null)
+            db.close();
+    }
 }
