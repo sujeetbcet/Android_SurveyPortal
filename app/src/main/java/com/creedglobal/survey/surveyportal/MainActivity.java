@@ -1,9 +1,12 @@
 package com.creedglobal.survey.surveyportal;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,15 +30,19 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity {
-
+    SharedPreferences sharedpreferences;
     DBHandler db;
     Profile profile;
-    EditText edt_usr,edt_pwd;
-    String username,password;
+    EditText edt_usr, edt_pwd;
+    String username, password;
     boolean loginStatus = false;
     int id = 1;
     ViewFlipper flipper;
@@ -49,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db=new DBHandler(this);
+        db = new DBHandler(this);
         FacebookSdk.isInitialized();
         setContentView(R.layout.activity_main);
-        edt_usr= (EditText) findViewById(R.id.edt_username);
-        edt_pwd= (EditText) findViewById(R.id.edt_password);
+        edt_usr = (EditText) findViewById(R.id.edt_username);
+        edt_pwd = (EditText) findViewById(R.id.edt_password);
 //        loginButton = (LoginButton) findViewById(R.id.login_button);
         flipper = (ViewFlipper) findViewById(R.id.viewFlipper);
         if (loginStatus = false) {
@@ -85,18 +92,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickLogin(View view) {
-        username=edt_usr.getText().toString();
-        password=edt_pwd.getText().toString();
-        if (db.checkLogin(username,password)){
-            Data.username=username;
-            Data.email=username;
-            Log.i("infoo","Login Success");
+        username = edt_usr.getText().toString();
+        password = edt_pwd.getText().toString();
+        if (db.checkLogin(username, password)) {
+            Data.username = username;
+            Data.email = username;
+            Log.i("infoo", "Login Success");
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
 
-        }
-        else {
-            Toast.makeText(this,"Wrong username/password",Toast.LENGTH_LONG).show();
-            Log.i("infoo","Login Failed");
+        } else {
+            Toast.makeText(this, "Wrong username/password", Toast.LENGTH_LONG).show();
+            Log.i("infoo", "Login Failed");
         }
     }
+
 }
