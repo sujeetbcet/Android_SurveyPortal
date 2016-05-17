@@ -79,7 +79,7 @@ public class MainScreen extends AppCompatActivity
                     System.exit(1);
                 }
             });
-            builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton("no",  new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
