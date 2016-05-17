@@ -10,4 +10,12 @@ public interface Constraints {
     // This define the timeout to appear the next question after user select any option.
     public static final long delayTimeOut=500;
     public static final long splashScreenTimeOut=500;
+    public static final int flipperInterval=2000;
+
+
+    // credential for sending mail to customers
+    public static final String sender_email="activity.getactivity@gmail.com";
+    public static final String sender_password="creed@android";
+    public static final String sender_subject="Survey Portal";
+    public static final String sender_messageBody="Thanks for your valuable time...";
 }

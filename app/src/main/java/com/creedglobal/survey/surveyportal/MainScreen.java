@@ -1,8 +1,10 @@
 package com.creedglobal.survey.surveyportal;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -48,7 +50,6 @@ public class MainScreen extends AppCompatActivity
         transaction.add(R.id.fragmentcontainer,frag,"home_fragment");
         transaction.commit();
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -66,7 +67,26 @@ public class MainScreen extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+//            super.onBackPressed();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Do you want to exit ?");
+            builder.setCancelable(false);
+            builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    finish();
+                    System.exit(1);
+                }
+            });
+            builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog=builder.create();
+            dialog.show();
         }
     }
 
@@ -88,6 +108,7 @@ public class MainScreen extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new Setting());
             transaction.commit();
@@ -103,8 +124,6 @@ public class MainScreen extends AppCompatActivity
             return true;
         }
 
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -116,6 +135,8 @@ public class MainScreen extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+//            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new Home());
             transaction.commit();
@@ -124,17 +145,23 @@ public class MainScreen extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(), SurveyLauncher.class));
 
         } else if (id == R.id.nav_results) {
+//            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new ResultAllSurvey());
             transaction.commit();
 
 
         }  else if (id == R.id.nav_sync) {
+//            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new Sync());
             transaction.commit();
 
         } else if (id == R.id.nav_about) {
+//            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new About());
             transaction.commit();
@@ -152,11 +179,13 @@ public class MainScreen extends AppCompatActivity
             i.setData(Uri.parse(url));
             startActivity(i);
         } else if (id == R.id.nav_feed) {
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new Feedback());
             transaction.commit();
 
         } else if (id == R.id.nav_help) {
+            manager = getFragmentManager();
             transaction = manager.beginTransaction();
             transaction.replace(R.id.fragmentcontainer,new Support());
             transaction.commit();
@@ -167,7 +196,10 @@ public class MainScreen extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    
     public void gotoCreateSurvey(View view){
         startActivity(new Intent(this,CreateSurvey.class));
     }
+
+
 }

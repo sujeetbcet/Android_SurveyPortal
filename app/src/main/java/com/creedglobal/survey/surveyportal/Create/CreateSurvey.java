@@ -2,6 +2,7 @@ package com.creedglobal.survey.surveyportal.Create;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
@@ -61,18 +62,18 @@ public class CreateSurvey extends AppCompatActivity {
 
             case R.id.action_add_item:
                 // Hide the "empty" view since there is now at least one item in the list.
-
-                if (qid < maxq) {
-                    addItem();
-
-                } else {
-                    Snackbar.make(toolbar, "You cannot add more questions", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-//                    Toast.makeText(this, "You cannot add more questions", Toast.LENGTH_LONG).show();
-                }
+                done(mContainerView);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void addQuestion(View view){
+        if (qid < maxq) {
+            addItem();
+        } else {
+            Snackbar.make(toolbar, "You cannot add more questions", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
     }
 
     private void addItem() {
@@ -116,8 +117,8 @@ public class CreateSurvey extends AppCompatActivity {
 //            view.setClickable(false);
 
             if (qid < minq) {
-                Snackbar.make(view, "please add atleast 3 questions", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Please add atleast "+Constraints.minq+" questions", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).setActionTextColor(Color.RED).show();
 //                Toast.makeText(this, "please add atleast 3 questions", Toast.LENGTH_LONG).show();
             } else {
                 surveyName = surveyname_edit.getText().toString().toLowerCase();

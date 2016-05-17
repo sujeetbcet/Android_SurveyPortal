@@ -16,6 +16,9 @@ import com.creedglobal.survey.surveyportal.fragments.Home;
 
 import java.util.Arrays;
 
+//
+
+
 public class Submit extends AppCompatActivity {
     EditText edt_name,edt_email, edt_mobile, edt_msg;
 
@@ -41,6 +44,7 @@ public class Submit extends AppCompatActivity {
             {
                 Toast.makeText(getApplicationContext(),"Your result is submitted Successfully",Toast.LENGTH_SHORT).show();
                 db.close();
+                startActivity(new Intent(getApplicationContext(),SurveyLauncher.class));
             }
             else {
                 Toast.makeText(getApplicationContext(),"ops...! something went wrong",Toast.LENGTH_SHORT).show();
@@ -64,4 +68,7 @@ public class Submit extends AppCompatActivity {
         }
         return valid;
     }
+
+    // AsyncTask for sending mail to customer
+    
 }

@@ -20,6 +20,7 @@ import android.widget.ViewFlipper;
 
 
 import com.creedglobal.survey.surveyportal.Database.DBHandler;
+import com.creedglobal.survey.surveyportal.Info.Constraints;
 import com.creedglobal.survey.surveyportal.Info.Data;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -78,13 +79,14 @@ public class MainActivity extends AppCompatActivity {
             flipper.setInAnimation(this, android.R.anim.fade_in);
 //            flipper.setOutAnimation(this, android.R.anim.fade_out);
             flipper.setAutoStart(true);
-            flipper.setFlipInterval(2000);
+            flipper.setFlipInterval(Constraints.flipperInterval);
         }
     }
 
 
     public void gotoRegister(View view) {
         startActivity(new Intent(getApplicationContext(), Registration.class));
+        finish();
     }
 
     public void forgotPassword(View view) {
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             Data.email = username;
             Log.i("infoo", "Login Success");
             startActivity(new Intent(getApplicationContext(), MainScreen.class));
+            finish();
 
         } else {
             Toast.makeText(this, "Wrong username/password", Toast.LENGTH_LONG).show();
