@@ -48,7 +48,6 @@ public class SplashScreen extends Activity {
                     startActivity(i);
                 }
                 finish();
-
             }
         }, Constraints.splashScreenTimeOut);
     }

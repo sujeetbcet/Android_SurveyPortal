@@ -18,12 +18,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.creedglobal.survey.surveyportal.Create.CreateSurvey;
 import com.creedglobal.survey.surveyportal.fragments.About;
-import com.creedglobal.survey.surveyportal.fragments.Feedback;
 import com.creedglobal.survey.surveyportal.fragments.Home;
 import com.creedglobal.survey.surveyportal.fragments.ResultAllSurvey;
 import com.creedglobal.survey.surveyportal.fragments.Setting;
@@ -179,10 +177,10 @@ public class MainScreen extends AppCompatActivity
             i.setData(Uri.parse(url));
             startActivity(i);
         } else if (id == R.id.nav_feed) {
-            manager = getFragmentManager();
-            transaction = manager.beginTransaction();
-            transaction.replace(R.id.fragmentcontainer,new Feedback());
-            transaction.commit();
+//            manager = getFragmentManager();
+//            transaction = manager.beginTransaction();
+//            transaction.replace(R.id.fragmentcontainer,new Feedback());
+//            transaction.commit();
 
         } else if (id == R.id.nav_help) {
             manager = getFragmentManager();
