@@ -47,7 +47,7 @@ public class MainScreen extends AppCompatActivity
         Home frag = new Home();
         manager = getFragmentManager();
         transaction = manager.beginTransaction();
-        transaction.add(R.id.fragmentcontainer,frag,"home_fragment");
+        transaction.replace(R.id.fragmentcontainer,frag,"home_fragment");
         transaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
