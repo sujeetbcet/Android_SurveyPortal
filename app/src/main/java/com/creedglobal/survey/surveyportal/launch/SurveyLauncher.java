@@ -107,4 +107,10 @@ public class SurveyLauncher extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(),MainScreen.class));
+        finish();
+    }
 }

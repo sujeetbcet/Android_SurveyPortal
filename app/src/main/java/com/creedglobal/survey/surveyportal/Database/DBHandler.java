@@ -113,7 +113,6 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-
         db.execSQL(CREATE_TABLE_NAME_SURVEY);
         db.execSQL(CREATE_TABLE_SURVEY_USER);
         db.execSQL(CREATE_TABLE_CUSTOMER);

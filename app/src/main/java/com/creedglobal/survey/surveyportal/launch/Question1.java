@@ -111,4 +111,9 @@ public class Question1 extends AppCompatActivity {
             }
         }, Constraints.delayTimeOut);
     }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+    }
 }
