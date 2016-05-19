@@ -60,13 +60,12 @@
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_feedback">Feedback</string>
     <string name="title_activity_sync">Sync</string>
-    <string name="tvEmail">Email:</string>
-    <string name="tvPhone">Phone:</string>
-    <string name="tvFeedback">Feedback:</string>
-    <string name="tvRating">Rating:</string>
-    <string name="btnSubmit">Submit</string>
-    <string name="btnCancel">Cancel</string>
-    <string name="view_feedback">View Feedback</string>
+    <string name="aboutus_content">Survey Portal is easy way to manage all type of survey.
+        Can create a survey for your shop, for your office, for yor business.
+        Can create your own Survey and take the survey from user,
+        capture the result, analyse the result to take a better decision for your Business.
+    </string>
+    <string name="version">version 1.0.0</string>
 
 
 </resources>
