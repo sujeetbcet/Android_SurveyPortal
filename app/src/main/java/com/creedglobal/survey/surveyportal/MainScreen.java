@@ -87,7 +87,9 @@ public class MainScreen extends AppCompatActivity
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
+                    android.os.Process.killProcess(android.os.Process.myPid());
                     finish();
+
                     System.exit(1);
                 }
             });

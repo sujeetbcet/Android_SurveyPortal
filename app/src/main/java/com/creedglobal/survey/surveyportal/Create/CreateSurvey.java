@@ -158,6 +158,7 @@ public class CreateSurvey extends AppCompatActivity {
                 }
                 if (isInsertedToDB){
                     startActivity(new Intent(getApplicationContext(),SurveyLauncher.class));
+                    finish();
                 }
                 else {
 

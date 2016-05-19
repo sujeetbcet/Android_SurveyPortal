@@ -18,4 +18,6 @@ public interface Constraints {
     public static final String sender_password="creed@android";
     public static final String sender_subject="Survey Portal";
     public static final String sender_messageBody="Thanks for your valuable time...";
+
+    public static final String jsonEmployee="{\"employees\":[{\"firstName\":\"John\", \"lastName\":\"Doe\"},{\"firstName\":\"Anna\", \"lastName\":\"Smith\"},{\"firstName\":\"Peter\", \"lastName\":\"Jones\"}]}";
 }
