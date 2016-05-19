@@ -37,7 +37,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+
                 android:orientation="vertical"
                 >
 
@@ -45,9 +45,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
-                    android:text="FULL NAME"
-                    android:layout_marginBottom="5dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Full Name"
+                    android:textColor="#000000"
+
                     />
                 <TextView
                     android:id="@+id/txt_fullname"
@@ -55,24 +55,23 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:text=""
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#000000" />
+
+ />
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
-                    android:text="EMAIL"
-                    android:layout_marginBottom="5dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Email"
+                    android:textColor="#000000"
                     />
 
                 <TextView
@@ -81,23 +80,22 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:text=""
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#000000" />
+
+ />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:text="MOBILE"
-                    android:layout_marginBottom="5dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_weight="0.5  "
+                    android:text="Mobile"
+                    android:textColor="#000000"
                     />
 
                 <EditText
@@ -105,9 +103,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:textColor="#000000"
-                    android:layout_weight="0.3"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+
+                    android:layout_weight="0.5"
+
                     android:text=""
                     android:maxLength="10"
                     android:inputType="number" />
@@ -116,16 +114,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
+                    android:textColor="#000000"
+                    android:text="Occupation"
 
-                    android:text="OCCUPATION"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     />
 
                 <EditText
@@ -140,14 +138,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="0.7"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#000000"
                     android:layout_height="wrap_content"
-                    android:text="ADDRESS "/>
+                    android:text="Address "/>
                 <EditText
                     android:id="@+id/edt_address"
                     android:layout_width="match_parent"
