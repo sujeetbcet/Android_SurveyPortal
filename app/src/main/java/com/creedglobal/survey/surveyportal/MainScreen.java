@@ -3,6 +3,7 @@ package com.creedglobal.survey.surveyportal;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.creedglobal.survey.surveyportal.Create.CreateSurvey;
+import com.creedglobal.survey.surveyportal.Database.DBHandler;
 import com.creedglobal.survey.surveyportal.fragments.About;
 import com.creedglobal.survey.surveyportal.fragments.Home;
 import com.creedglobal.survey.surveyportal.fragments.ResultAllSurvey;
@@ -28,12 +30,24 @@ import com.creedglobal.survey.surveyportal.fragments.Setting;
 import com.creedglobal.survey.surveyportal.fragments.Support;
 import com.creedglobal.survey.surveyportal.fragments.Sync;
 import com.creedglobal.survey.surveyportal.launch.SurveyLauncher;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FragmentManager manager;
     FragmentTransaction transaction;
-
+    DBHandler controller = new DBHandler(this);
+    //Progress Dialog Object
+    ProgressDialog prgDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,6 +165,7 @@ public class MainScreen extends AppCompatActivity
 
 
         }  else if (id == R.id.nav_sync) {
+           // syncSQLiteMySQLDB();
 //            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
             manager = getFragmentManager();
             transaction = manager.beginTransaction();
@@ -176,12 +191,6 @@ public class MainScreen extends AppCompatActivity
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             startActivity(i);
-        } else if (id == R.id.nav_feed) {
-//            manager = getFragmentManager();
-//            transaction = manager.beginTransaction();
-//            transaction.replace(R.id.fragmentcontainer,new Feedback());
-//            transaction.commit();
-
         } else if (id == R.id.nav_help) {
             manager = getFragmentManager();
             transaction = manager.beginTransaction();
@@ -198,6 +207,59 @@ public class MainScreen extends AppCompatActivity
     public void gotoCreateSurvey(View view){
         startActivity(new Intent(this,CreateSurvey.class));
     }
+
+//    public void syncSQLiteMySQLDB() {
+//        //Create AsycHttpClient object
+//        AsyncHttpClient client = new AsyncHttpClient();
+//        RequestParams params = new RequestParams();
+//        ArrayList<HashMap<String, String>> userList = controller.getAllUsers();
+//        if (userList.size() != 0) {
+//            if (controller.dbSyncCount() != 0) {
+//                prgDialog.show();
+//                params.put("usersJSON", controller.composeJSONfromSQLite());
+//                client.post("http://zinee.in/demo/sync/insertuser.php", params, new AsyncHttpResponseHandler() {
+//                    @Override
+//                    public void onSuccess(String response) {
+//                        System.out.println(response);
+//                        prgDialog.hide();
+//                        try {
+//                            JSONArray arr = new JSONArray(response);
+//                            System.out.println(arr.length());
+//                            for (int i = 0; i < arr.length(); i++) {
+//                                JSONObject obj = (JSONObject) arr.get(i);
+//                                System.out.println(obj.get("id"));
+//                                System.out.println(obj.get("status"));
+//                                controller.updateSyncStatus(obj.get("id").toString(), obj.get("status").toString());
+//                            }
+//                            Toast.makeText(getApplicationContext(), "DB Sync completed!", Toast.LENGTH_LONG).show();
+//                        } catch (JSONException e) {
+//                            // TODO Auto-generated catch block
+//                            Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    @Override
+//                    public void onFailure(int statusCode, Throwable error,
+//                                          String content) {
+//                        // TODO Auto-generated method stub
+//                        prgDialog.hide();
+//                        if(statusCode == 404){
+//                            Toast.makeText(getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
+//                        }else if(statusCode == 500){
+//                            Toast.makeText(getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
+//                        }else{
+//                            Toast.makeText(getApplicationContext(), "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet]", Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//
+//                });
+//            }else{
+//                Toast.makeText(getApplicationContext(), "SQLite and Remote MySQL DBs are in Sync!", Toast.LENGTH_LONG).show();
+//            }
+//        }else{
+//            Toast.makeText(getApplicationContext(), "No data in SQLite DB, please do enter User name to perform Sync action", Toast.LENGTH_LONG).show();
+//        }
+//    }
 
 
 }

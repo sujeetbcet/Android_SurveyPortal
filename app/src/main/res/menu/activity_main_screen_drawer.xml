@@ -36,10 +36,7 @@
                 android:id="@+id/nav_rate"
                 android:icon="@android:drawable/btn_star_big_on"
                 android:title="Rate this App"/>
-            <item
-                android:id="@+id/nav_feed"
-                android:icon="@android:drawable/ic_menu_edit"
-                android:title="Feedback"/>
+
             <item
                 android:id="@+id/nav_help"
                 android:icon="@android:drawable/sym_action_call"

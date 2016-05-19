@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/white"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="survey portal"
-        android:id="@+id/textView17"
-        android:textStyle="italic"
-        android:textSize="30dp"
-        android:layout_below="@+id/imageView3"
-        android:layout_centerHorizontal="true" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="survey portal"-->
+        <!--android:id="@+id/textView17"-->
+        <!--android:textStyle="italic"-->
+        <!--android:textSize="30dp"-->
+        <!--android:layout_below="@+id/imageView3"-->
+        <!--android:layout_centerHorizontal="true" />-->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="powered by www.creedglobal.com"
         android:id="@+id/textView22"
+        android:textSize="18sp"
         android:textStyle="bold|italic"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -30,6 +32,19 @@
         android:id="@+id/imageView3"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/logo_survey" />
+        android:src="@drawable/logo_rectangle" />
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageView4"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_tick" />
 
 </RelativeLayout>
+    <!--<ImageView-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/welcome"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:id="@+id/welcome"/>-->
+
