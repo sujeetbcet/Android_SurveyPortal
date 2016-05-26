@@ -19,6 +19,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.creedglobal.survey.surveyportal.Create.CreateSurvey;
@@ -71,7 +74,23 @@ public class MainScreen extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        ArrayList<HashMap<String, String>> userList = controller.getAllUsers();
+        //
+        if (userList.size() != 0) {
+//            //Set the User Array list in ListView
+//            ListAdapter adapter = new SimpleAdapter(MainScreen.this, userList, R.layout.view_user_entry, new String[]{"userId", "userName"}, new int[]{R.id.userId, R.id.userName});
+//            ListView myList = (ListView) findViewById(android.R.id.list);
+//            myList.setAdapter(adapter);
+            //Display Sync status of SQLite DB
+            Toast.makeText(getApplicationContext(), controller.getSyncStatus(), Toast.LENGTH_LONG).show();
+        }
+        //Initialize Progress Dialog properties
+        prgDialog = new ProgressDialog(this);
+        prgDialog.setMessage("Synching SQLite Data with Remote MySQL DB. Please wait...");
+        prgDialog.setCancelable(false);
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -119,7 +138,10 @@ public class MainScreen extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        if (id == R.id.nav_sync) {
+            syncSQLiteMySQLDB();
+            return true;
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             manager = getFragmentManager();
@@ -167,7 +189,7 @@ public class MainScreen extends AppCompatActivity
 
 
         }  else if (id == R.id.nav_sync) {
-           // syncSQLiteMySQLDB();
+//           syncSQLiteMySQLDB();
 //            manager.popBackStackImmediate(null,manager.POP_BACK_STACK_INCLUSIVE);
             manager = getFragmentManager();
             transaction = manager.beginTransaction();
@@ -210,58 +232,58 @@ public class MainScreen extends AppCompatActivity
         startActivity(new Intent(this,CreateSurvey.class));
     }
 
-//    public void syncSQLiteMySQLDB() {
-//        //Create AsycHttpClient object
-//        AsyncHttpClient client = new AsyncHttpClient();
-//        RequestParams params = new RequestParams();
-//        ArrayList<HashMap<String, String>> userList = controller.getAllUsers();
-//        if (userList.size() != 0) {
-//            if (controller.dbSyncCount() != 0) {
-//                prgDialog.show();
-//                params.put("usersJSON", controller.composeJSONfromSQLite());
-//                client.post("http://zinee.in/demo/sync/insertuser.php", params, new AsyncHttpResponseHandler() {
-//                    @Override
-//                    public void onSuccess(String response) {
-//                        System.out.println(response);
-//                        prgDialog.hide();
-//                        try {
-//                            JSONArray arr = new JSONArray(response);
-//                            System.out.println(arr.length());
-//                            for (int i = 0; i < arr.length(); i++) {
-//                                JSONObject obj = (JSONObject) arr.get(i);
-//                                System.out.println(obj.get("id"));
-//                                System.out.println(obj.get("status"));
-//                                controller.updateSyncStatus(obj.get("id").toString(), obj.get("status").toString());
-//                            }
-//                            Toast.makeText(getApplicationContext(), "DB Sync completed!", Toast.LENGTH_LONG).show();
-//                        } catch (JSONException e) {
-//                            // TODO Auto-generated catch block
-//                            Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                    @Override
-//                    public void onFailure(int statusCode, Throwable error,
-//                                          String content) {
-//                        // TODO Auto-generated method stub
-//                        prgDialog.hide();
-//                        if(statusCode == 404){
-//                            Toast.makeText(getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
-//                        }else if(statusCode == 500){
-//                            Toast.makeText(getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
-//                        }else{
-//                            Toast.makeText(getApplicationContext(), "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet]", Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//
-//                });
-//            }else{
-//                Toast.makeText(getApplicationContext(), "SQLite and Remote MySQL DBs are in Sync!", Toast.LENGTH_LONG).show();
-//            }
-//        }else{
-//            Toast.makeText(getApplicationContext(), "No data in SQLite DB, please do enter User name to perform Sync action", Toast.LENGTH_LONG).show();
-//        }
-//    }
+    public void syncSQLiteMySQLDB() {
+        //Create AsycHttpClient object
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        ArrayList<HashMap<String, String>> userList = controller.getAllUsers();
+        if (userList.size() != 0) {
+            if (controller.dbSyncCount() != 0) {
+                prgDialog.show();
+                params.put("usersJSON", controller.composeJSONfromSQLite());
+                client.post("http://zinee.in/demo/sync/insertuser.php", params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(String response) {
+                        System.out.println(response);
+                        prgDialog.hide();
+                        try {
+                            JSONArray arr = new JSONArray(response);
+                            System.out.println(arr.length());
+                            for (int i = 0; i < arr.length(); i++) {
+                                JSONObject obj = (JSONObject) arr.get(i);
+                                System.out.println(obj.get("id"));
+                                System.out.println(obj.get("status"));
+                                controller.updateSyncStatus(obj.get("id").toString(), obj.get("status").toString());
+                            }
+                            Toast.makeText(getApplicationContext(), "DB Sync completed!", Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+
+                            Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Throwable error,
+                                          String content) {
+
+                        prgDialog.hide();
+                        if(statusCode == 404){
+                            Toast.makeText(getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
+                        }else if(statusCode == 500){
+                            Toast.makeText(getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet]", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                });
+            }else{
+                Toast.makeText(getApplicationContext(), "SQLite and Remote MySQL DBs are in Sync!", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Toast.makeText(getApplicationContext(), "No data in SQLite DB, please do enter User name to perform Sync action", Toast.LENGTH_LONG).show();
+        }
+    }
 
 
 }

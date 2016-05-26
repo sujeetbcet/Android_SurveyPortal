@@ -703,111 +703,113 @@ public class DBHandler extends SQLiteOpenHelper {
         if (db!=null)
             db.close();
     }
-//    public ArrayList<HashMap<String, String>> getAllUsers() {
-//        ArrayList<HashMap<String, String>> wordList;
-//        wordList = new ArrayList<HashMap<String, String>>();
-//        String selectQuery = "SELECT  * FROM Survey_customer";
-//        SQLiteDatabase database = this.getWritableDatabase();
-//        Cursor cursor = database.rawQuery(selectQuery, null);
-//        if (cursor.moveToFirst()) {
-//            do {
-//                HashMap<String, String> map = new HashMap<String, String>();
-//                map.put("userId", cursor.getString(0));
-//                map.put("username", cursor.getString(1));
-//                map.put("mobile",cursor.getString(2));
-//                map.put("email",cursor.getString(3));
-//                map.put("message",cursor.getString(4));
-//                map.put("survey",cursor.getString(5));
-//                map.put("question1", cursor.getString(6));
-//                map.put("question2",cursor.getString(7));
-//                map.put("question3",cursor.getString(8));
-//                map.put("question4",cursor.getString(9));
-//                map.put("question5",cursor.getString(10));
-//                map.put("question6", cursor.getString(11));
-//                map.put("question7",cursor.getString(12));
-//                map.put("question8",cursor.getString(13));
-//                map.put("question8",cursor.getString(14));
-//                map.put("question10",cursor.getString(15));
-//                wordList.add(map);
-//            } while (cursor.moveToNext());
-//        }
-//        database.close();
-//        return wordList;
-//    }
-//
-//    public String composeJSONfromSQLite(){
-//        ArrayList<HashMap<String, String>> wordList;
-//        wordList = new ArrayList<HashMap<String, String>>();
-//        String selectQuery = "SELECT  * FROM Survey_customer where udpateStatus = '"+"no"+"'";
-//        SQLiteDatabase database = this.getWritableDatabase();
-//        Cursor cursor = database.rawQuery(selectQuery, null);
-//        if (cursor.moveToFirst()) {
-//            do {
-//                HashMap<String, String> map = new HashMap<String, String>();
-//                map.put("userId", cursor.getString(0));
-//                map.put("username", cursor.getString(1));
-//                map.put("mobile",cursor.getString(2));
-//                map.put("email",cursor.getString(3));
-//                map.put("message",cursor.getString(4));
-//                map.put("survey",cursor.getString(5));
-//                map.put("question1", cursor.getString(6));
-//                map.put("question2",cursor.getString(7));
-//                map.put("question3",cursor.getString(8));
-//                map.put("question4",cursor.getString(9));
-//                map.put("question5",cursor.getString(10));
-//                map.put("question6", cursor.getString(11));
-//                map.put("question7",cursor.getString(12));
-//                map.put("question8",cursor.getString(13));
-//                map.put("question8",cursor.getString(14));
-//                map.put("question10",cursor.getString(15));
-//                wordList.add(map);
-//            } while (cursor.moveToNext());
-//        }
-//        database.close();
-//        Gson gson = new GsonBuilder().create();
-//        //Use GSON to serialize Array List to JSON
-//        return gson.toJson(wordList);
-//    }
-//
-//    /**
-//     * Get Sync status of SQLite
-//     * @return
-//     */
-//    public String getSyncStatus(){
-//        String msg = null;
-//        if(this.dbSyncCount() == 0){
-//            msg = "SQLite and Remote MySQL DBs are in Sync!";
-//        }else{
-//            msg = "DB Sync needed";
-//        }
-//        return msg;
-//    }
-//
-//    /**
-//     * Get SQLite records that are yet to be Synced
-//     * @return
-//     */
-//    public int dbSyncCount(){
-//        int count = 0;
-//        String selectQuery = "SELECT  * Survey_customer where udpateStatus = '"+"no"+"'";
-//        SQLiteDatabase database = this.getWritableDatabase();
-//         Cursor cursor = database.rawQuery(selectQuery, null);
-//        count = cursor.getCount();
-//        database.close();
-//        return count;
-//    }
-//
-//    /**
-//     * Update Sync status against each User ID
-//     * @param id
-//     * @param status
-//     */
-//    public void updateSyncStatus(String id, String status){
-//        SQLiteDatabase database = this.getWritableDatabase();
-//        String updateQuery = "Update Survey_customer set udpateStatus = '"+ status +"' where userId="+"'"+ id +"'";
-//        Log.d("query",updateQuery);
-//        database.execSQL(updateQuery);
-//        database.close();
-//    }
+
+    public ArrayList<HashMap<String, String>> getAllUsers() {
+        ArrayList<HashMap<String, String>> wordList;
+        wordList = new ArrayList<HashMap<String, String>>();
+        String selectQuery = "SELECT  * FROM Survey_customer";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("userId", cursor.getString(0));
+                map.put("username", cursor.getString(1));
+                map.put("mobile",cursor.getString(2));
+                map.put("email",cursor.getString(3));
+                map.put("message",cursor.getString(4));
+                map.put("survey",cursor.getString(5));
+                map.put("question1", cursor.getString(6));
+                map.put("question2",cursor.getString(7));
+                map.put("question3",cursor.getString(8));
+                map.put("question4",cursor.getString(9));
+                map.put("question5",cursor.getString(10));
+                map.put("question6", cursor.getString(11));
+                map.put("question7",cursor.getString(12));
+                map.put("question8",cursor.getString(13));
+                map.put("question8",cursor.getString(14));
+                map.put("question10",cursor.getString(15));
+                wordList.add(map);
+            } while (cursor.moveToNext());
+        }
+        database.close();
+        return wordList;
+    }
+
+    public String composeJSONfromSQLite(){
+        ArrayList<HashMap<String, String>> wordList;
+        wordList = new ArrayList<HashMap<String, String>>();
+        String selectQuery = "SELECT  * FROM Survey_customer where udpateStatus = '"+"no"+"'";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("userId", cursor.getString(0));
+                map.put("username", cursor.getString(1));
+                map.put("mobile",cursor.getString(2));
+                map.put("email",cursor.getString(3));
+                map.put("message",cursor.getString(4));
+                map.put("survey",cursor.getString(5));
+                map.put("question1", cursor.getString(6));
+                map.put("question2",cursor.getString(7));
+                map.put("question3",cursor.getString(8));
+                map.put("question4",cursor.getString(9));
+                map.put("question5",cursor.getString(10));
+                map.put("question6", cursor.getString(11));
+                map.put("question7",cursor.getString(12));
+                map.put("question8",cursor.getString(13));
+                map.put("question8",cursor.getString(14));
+                map.put("question10",cursor.getString(15));
+                map.put("temp_1",cursor.getString(16));
+                wordList.add(map);
+            } while (cursor.moveToNext());
+        }
+        database.close();
+        Gson gson = new GsonBuilder().create();
+        //Use GSON to serialize Array List to JSON
+        return gson.toJson(wordList);
+    }
+
+    /**
+     * Get Sync status of SQLite
+     * @return
+     */
+    public String getSyncStatus(){
+        String msg = null;
+        if(this.dbSyncCount() == 0){
+            msg = "SQLite and Remote MySQL DBs are in Sync!";
+        }else{
+            msg = "DB Sync needed";
+        }
+        return msg;
+    }
+
+    /**
+     * Get SQLite records that are yet to be Synced
+     * @return
+     */
+    public int dbSyncCount(){
+        int count = 0;
+        String selectQuery = "SELECT  * Survey_customer where udpateStatus = '"+"no"+"'";
+        SQLiteDatabase database = this.getWritableDatabase();
+         Cursor cursor = database.rawQuery(selectQuery, null);
+        count = cursor.getCount();
+        database.close();
+        return count;
+    }
+
+    /**
+     * Update Sync status against each User ID
+     * @param id
+     * @param status
+     */
+    public void updateSyncStatus(String id, String status){
+        SQLiteDatabase database = this.getWritableDatabase();
+        String updateQuery = "Update Survey_customer set udpateStatus = '"+ status +"' where userId="+"'"+ id +"'";
+        Log.d("query",updateQuery);
+        database.execSQL(updateQuery);
+        database.close();
+    }
 
 }
