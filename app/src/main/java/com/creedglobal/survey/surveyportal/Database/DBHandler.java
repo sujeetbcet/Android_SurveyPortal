@@ -7,7 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.creedglobal.survey.surveyportal.Info.Data;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,7 +22,7 @@ public class DBHandler extends SQLiteOpenHelper {
     String queryString;
 
     // Database Version
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
     // Database Name
     public static final String DATABASE_NAME = "SurveyPortal.db";
     // Contacts table name
@@ -52,6 +57,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_Ques_9 = "question9";
     private static final String KEY_Ques_10 = "question10";
     private static final String KEY_Temp_1 = "temp_1";
+    private static final String KEY_SyncStatus="sync";
 
     //Survey_user table columns
     private static final String KEY_ADMIN_NAME = "admin_name";
@@ -73,7 +79,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_CUSTOMER = "CREATE TABLE " + TABLE_NAME_CUSTOMER
             + "("
             + KEY_Username + " TEXT,"
-            + KEY_Mobile + " INTEGER,"
+            + KEY_Mobile + " TEXT,"
             + KEY_Email + " VARCHAR,"
             + KEY_Msg + " TEXT, "
             + KEY_Cust_Surveyname + " TEXT,"
@@ -87,6 +93,7 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_Ques_8 + " TEXT, "
             + KEY_Ques_9 + " TEXT, "
             + KEY_Ques_10 + " TEXT, "
+            +KEY_SyncStatus + " TEXT DEFAULT 'no', "
             + KEY_Temp_1 + " TEXT "
             + ");";
 
@@ -165,8 +172,7 @@ public class DBHandler extends SQLiteOpenHelper {
         boolean status = false;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-//        values.put(KEY_NAME, details.getName()); // Contact Name
-//        values.put(KEY_PHONE, details.getPhone()); // Contact Phone
+
         values.put(KEY_Surveyname, details.getSurveyname());
         values.put(KEY_Question, details.getQuestion());
         values.put(KEY_RESPONSE_1, details.getResponse_1());
@@ -175,7 +181,8 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_RESPONSE_4, details.getResponse_4());
         // Inserting Row
         db.insert(TABLE_NAME_SURVEY, null, values);
-        db.close(); // Closing database connection
+        // Closing database connection
+        db.close();
         Log.i("infoo : ", "addDetails>DBHandler . details inserted & connection closed ");
 
         if (db != null) {
@@ -225,7 +232,6 @@ public class DBHandler extends SQLiteOpenHelper {
             return status;
         }
         else {
-//            db.close();
             db=this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(KEY_ADMIN_NAME,userdetails[0]);
@@ -259,14 +265,11 @@ public class DBHandler extends SQLiteOpenHelper {
         Details_db details = new Details_db();
         SQLiteDatabase db = this.getReadableDatabase();
 
-
-//        String smtp=" select * from survey where surveyname=\"creed"+"\" and rowid="+qid;
         String sqlquery=" select * from survey where surveyname=\""+surveyname+"\" and rowid="+qid;
 //        Cursor cursor = db.query(TABLE_NAME_SURVEY, new String[] {  KEY_Surveyname,KEY_Question,KEY_RESPONSE_1,KEY_RESPONSE_2,KEY_RESPONSE_3,KEY_RESPONSE_4, }, KEY_QID + "=?", new String[] { String.valueOf(qid) }, null, null, null, null);
         Cursor cursor=db.rawQuery(sqlquery,null);
         if (cursor.moveToFirst()) {
             do {
-//                Details_db details = new Details_db();
                 details.setQid(cursor.getShort(0));
                 details.setSurveyname(cursor.getString(1));
                 details.setQuestion(cursor.getString(2));
@@ -301,15 +304,12 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Details_db details = new Details_db();
-//                details.setName(cursor.getString(0));
-//                details.setPhone(cursor.getString(1));
                 details.setSurveyname(cursor.getString(0));
                 details.setQuestion(cursor.getString(1));
                 details.setResponse_1(cursor.getString(2));
                 details.setResponse_2(cursor.getString(3));
                 details.setResponse_3(cursor.getString(4));
                 details.setResponse_4(cursor.getString(5));
-//                details.setComment(cursor.getString(7));
 
                 // Adding contact to list
                 detailsList.add(details);
@@ -328,16 +328,12 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-//        values.put(KEY_NAME, details.getName());
-//        values.put(KEY_PHONE, details.getPhone());
         values.put(KEY_Surveyname,details.getSurveyname());
         values.put(KEY_Question,details.getQuestion());
         values.put(KEY_RESPONSE_1,details.getResponse_1());
         values.put(KEY_RESPONSE_2,details.getResponse_2());
         values.put(KEY_RESPONSE_3,details.getResponse_3());
         values.put(KEY_RESPONSE_4,details.getResponse_4());
-//        values.put(KEY_COMMENT,details.getComment());
-
 
         // updating row
         return db.update(TABLE_NAME_SURVEY, values, KEY_Question + " = ?",
@@ -360,18 +356,14 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
 
-        // return count
         return cursor.getCount();
     }
+
 // Crud operation for survey_user
-
-
     public void addDetails_user(Details_user details_user) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
-//        values.put(KEY_NAME, details.getName()); // Contact Name
-//        values.put(KEY_PHONE, details.getPhone()); // Contact Phone
+
         values.put(KEY_Username,details_user.getUsername());
         values.put(KEY_Email,details_user.getEmail());
         values.put(KEY_Mobile,details_user.getMobile_no());
@@ -382,7 +374,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_Ques_4,details_user.getQues_4());
         values.put(KEY_Ques_5,details_user.getQues_5());
         values.put(KEY_Temp_1,details_user.getTemp_1());
-
 
         // Inserting Row
         db.insert(TABLE_NAME_USER, null, values);
@@ -406,9 +397,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Getting All Contacts
     public List<Details_user> getAllContacts_user() {
         List<Details_user> detailsList_user = new ArrayList<Details_user>();
-        // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_NAME_USER;
-
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor_user = db.rawQuery(selectQuery, null);
 
@@ -416,8 +405,7 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor_user.moveToFirst()) {
             do {
                 Details_user details_user = new Details_user();
-//                details.setName(cursor.getString(0));
-//                details.setPhone(cursor.getString(1));
+
                 details_user.setUsername(cursor_user.getString(0));
                 details_user.setMobile_no(cursor_user.getString(1));
                 details_user.setEmail(cursor_user.getString(2));
@@ -428,8 +416,6 @@ public class DBHandler extends SQLiteOpenHelper {
                 details_user.setQues_5(cursor_user.getString(7));
                 details_user.setQues_4(cursor_user.getString(8));
                 details_user.setTemp_1(cursor_user.getString(9));
-//                details.setComment(cursor.getString(7));
-
                 // Adding contact to list
                 detailsList_user.add(details_user);
             }
@@ -445,10 +431,8 @@ public class DBHandler extends SQLiteOpenHelper {
     // Updating single contact
     public int updateContact_user(Details_user details_user) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
-//        values.put(KEY_NAME, details.getName());
-//        values.put(KEY_PHONE, details.getPhone());
+
         values.put(KEY_Username,details_user.getUsername());
         values.put(KEY_Email,details_user.getEmail());
         values.put(KEY_Mobile,details_user.getMobile_no());
@@ -459,9 +443,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_Ques_4,details_user.getQues_4());
         values.put(KEY_Ques_5,details_user.getQues_5());
         values.put(KEY_Temp_1,details_user.getTemp_1());
-//        values.put(KEY_COMMENT,details.getComment());
-
-
         // updating row
         return db.update(TABLE_NAME_USER, values, KEY_Email + " = ?",
                 new String[] { String.valueOf(details_user.getEmail()) });
@@ -481,19 +462,14 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor_user = db.rawQuery(countQuery, null);
         cursor_user.close();
-
-        // return count
         return cursor_user.getCount();
     }
-    //  / Crud operation for survey_customer
 
-
+    //   Crud operation for survey_customer
     public void addDetails_customer(Customer_details_db details_customer) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
-//        values.put(KEY_NAME, details.getName()); // Contact Name
-//        values.put(KEY_PHONE, details.getPhone()); // Contact Phone
+
         values.put(KEY_ADMIN_NAME,details_customer.getAdminname());
         values.put(KEY_ADMIN_Email_id,details_customer.getEmail_id());
         values.put(KEY_ADMIN_Mobile_nos,details_customer.getMobile_nos());
@@ -502,8 +478,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_ADMIN_Temp_2,details_customer.getTemp_2());
         values.put(KEY_ADMIN_Temp_3,details_customer.getTemp_3());
         values.put(KEY_ADMIN_User_Type,details_customer.getUser_type());
-
-
 
         // Inserting Row
         db.insert(TABLE_NAME_CUSTOMER, null, values);
@@ -527,9 +501,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Getting All Contacts
     public List<Customer_details_db> getAllContacts_customer() {
         List<Customer_details_db> detailsList_Customer = new ArrayList<Customer_details_db>();
-        // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_NAME_CUSTOMER;
-
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor_customer = db.rawQuery(selectQuery, null);
 
@@ -537,8 +509,7 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor_customer.moveToFirst()) {
             do {
                 Customer_details_db details_customer = new Customer_details_db();
-//                details.setName(cursor.getString(0));
-//                details.setPhone(cursor.getString(1));
+
                 details_customer.setAdminname(cursor_customer.getString(0));
                 details_customer.setMobile_nos(cursor_customer.getString(1));
                 details_customer.setEmail_id(cursor_customer.getString(2));
@@ -547,7 +518,6 @@ public class DBHandler extends SQLiteOpenHelper {
                 details_customer.setTemp_2(cursor_customer.getString(5));
                 details_customer.setTemp_3(cursor_customer.getString(6));
                 details_customer.setUser_type(cursor_customer.getString(7));
-//                details.setComment(cursor.getString(7));
                 // Adding contact to list
                 detailsList_Customer.add(details_customer);
             }
@@ -566,8 +536,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-//        values.put(KEY_NAME, details.getName());
-//        values.put(KEY_PHONE, details.getPhone());
+
         values.put(KEY_ADMIN_NAME,details_customer.getAdminname());
         values.put(KEY_Email,details_customer.getEmail_id());
         values.put(KEY_ADMIN_Mobile_nos,details_customer.getMobile_nos());
@@ -576,11 +545,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_ADMIN_Temp_2,details_customer.getTemp_2());
         values.put(KEY_ADMIN_Temp_3,details_customer.getTemp_3());
         values.put(KEY_ADMIN_User_Type,details_customer.getUser_type());
-
-
-//        values.put(KEY_COMMENT,details.getComment());
-
-
         // updating row
         return db.update(TABLE_NAME_CUSTOMER, values, KEY_Email + " = ?",
                 new String[] { String.valueOf(details_customer.getEmail_id()) });
@@ -594,16 +558,6 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    // Getting contacts Count
-    public int getContactsCount_customer() {
-        queryString = "SELECT  * FROM " + TABLE_NAME_CUSTOMER;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor_customer = db.rawQuery(queryString, null);
-        cursor_customer.close();
-
-        // return count
-        return cursor_customer.getCount();
-    }
     public boolean checkLogin(String usr,String pwd){
         boolean status=false;
         queryString="select * from "+TABLE_NAME_USER+" where "+KEY_ADMIN_Email_id+"=\""+usr+"\" and "+ KEY_ADMIN_Password +"=\""+pwd+"\"";
@@ -624,6 +578,7 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 SurveyResponse response = new SurveyResponse();
+
                 response.setUsername(cursor.getString(0));
                 response.setMobile(cursor.getString(1));
                 response.setEmail(cursor.getString(2));
@@ -691,6 +646,113 @@ public class DBHandler extends SQLiteOpenHelper {
         closeResource(db,null);
         return status;
     }
+
+    // Sync db to remote
+    /**
+     * Get list of Users from SQLite DB as Array List
+     * @return
+     */
+    public ArrayList<HashMap<String, String>> getAllUsers() {
+        ArrayList<HashMap<String, String>> wordList;
+        wordList = new ArrayList<HashMap<String, String>>();
+        String selectQuery = "select * from "+TABLE_NAME_CUSTOMER;
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+
+                map.put("username", cursor.getString(0));
+                map.put("mobile", cursor.getString(1));
+                map.put("email", cursor.getString(2));
+                map.put("message", cursor.getString(3));
+                map.put("survey", cursor.getString(4));
+                map.put("response1", cursor.getString(5));
+                map.put("response2", cursor.getString(6));
+                map.put("response3", cursor.getString(7));
+                map.put("response4", cursor.getString(8));
+                map.put("response5", cursor.getString(9));
+                map.put("response6", cursor.getString(10));
+                map.put("response7", cursor.getString(11));
+                map.put("response8", cursor.getString(12));
+                map.put("response9", cursor.getString(13));
+                map.put("response10", cursor.getString(14));
+                map.put("sync", cursor.getString(15));
+
+                wordList.add(map);
+            }
+            while (cursor.moveToNext());
+        }
+        database.close();
+        return wordList;
+    }
+    /**
+     * Compose JSON out of SQLite records
+     * @return
+     */
+    public String composeJSONfromSQLite(){
+        ArrayList<HashMap<String, String>> wordList;
+        wordList = new ArrayList<HashMap<String, String>>();
+        String selectQuery = "select * from "+TABLE_NAME_CUSTOMER+" where "+KEY_SyncStatus+"='no'";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("username", cursor.getString(0));
+                map.put("mobile", cursor.getString(1));
+                map.put("email", cursor.getString(2));
+                map.put("message", cursor.getString(3));
+                map.put("survey", cursor.getString(4));
+                map.put("response1", cursor.getString(5));
+                map.put("response2", cursor.getString(6));
+                map.put("response3", cursor.getString(7));
+                map.put("response4", cursor.getString(8));
+                map.put("response5", cursor.getString(9));
+                map.put("response6", cursor.getString(10));
+                map.put("response7", cursor.getString(11));
+                map.put("response8", cursor.getString(12));
+                map.put("response9", cursor.getString(13));
+                map.put("response10", cursor.getString(14));
+                map.put("sync", cursor.getString(15));
+                map.put("admin_id", Data.email);
+
+                wordList.add(map);
+            }
+            while (cursor.moveToNext());
+        }
+        database.close();
+        Gson gson = new GsonBuilder().create();
+        //Use GSON to serialize Array List to JSON
+        return gson.toJson(wordList);
+    }
+    /**
+     * Get SQLite records that are yet to be Synced
+     * @return
+     */
+    public int dbSyncCount(){
+        int count = 0;
+        String selectQuery = "select  * from "+TABLE_NAME_CUSTOMER+" where "+KEY_SyncStatus+"=\"no\"";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        count = cursor.getCount();
+        database.close();
+        return count;
+    }
+    /**
+     * Update Sync status against each User ID
+    // * @param id
+    // * @param status
+     */
+    public void updateSyncStatus(String customer_email, String survey_name,String syncStatus){
+        SQLiteDatabase database = this.getWritableDatabase();
+        String updateQuery = "update "+TABLE_NAME_CUSTOMER+" set "+KEY_SyncStatus+" =\""+ syncStatus +"\" where "+KEY_Email+"=\""+ customer_email+"\" and "+KEY_Cust_Surveyname+"=\""+survey_name+"\"";
+        Log.d("query",updateQuery);
+        database.execSQL(updateQuery);
+        database.close();
+    }
+
+
 
     // it will close all open resource(if Opened), Call at the last of every method.
     public void closeResource(SQLiteDatabase db,Cursor cursor){

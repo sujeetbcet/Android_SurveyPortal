@@ -56,30 +56,30 @@
             android:name=".Registration"
             android:theme="@style/AppTheme" />
         <activity android:name=".Forgot" />
-        <activity android:name=".launch.Question1" />
+
+        <!--to clear all questions activity-->
         <activity
             android:name=".launch.SurveyLauncher"
+            android:clearTaskOnLaunch="true"
             android:label="@string/title_activity_survey_launcher"
             android:theme="@style/AppTheme"
             />
+        <activity android:name=".launch.Question1" />
         <activity android:name=".launch.Question2" />
         <activity android:name=".launch.Question3" />
         <activity android:name=".launch.Question4" />
         <activity android:name=".launch.Question5" />
         <activity android:name=".launch.Question6" />
+        <activity android:name=".launch.Question7" />
+        <activity android:name=".launch.Question8" />
+        <activity android:name=".launch.Question9" />
+        <activity android:name=".launch.Question10" />
         <activity android:name=".launch.Submit" />
         <activity
             android:name=".MainScreen"
             android:label="@string/title_activity_main_screen"
             android:theme="@style/AppTheme" />
-        <!--<activity-->
-            <!--android:name=".fragments.Support"-->
-            <!--android:label="@string/title_activity_support"-->
-            <!--android:theme="@style/AppTheme" />-->
-        <activity android:name=".launch.Question7" />
-        <activity android:name=".launch.Question8" />
-        <activity android:name=".launch.Question9" />
-        <activity android:name=".launch.Question10" />
+
         <activity android:name=".extra.DisplaySurveyResponse" />
         <activity android:name=".launch.StartSurveyScreen"></activity>
     </application>

@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "755875233187",
+    "firebase_url": "https://surveyportalcreed.firebaseio.com",
+    "project_id": "surveyportalcreed",
+    "storage_bucket": "surveyportalcreed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755875233187:android:e984e0fe31598363",
+        "android_client_info": {
+          "package_name": "com.creedglobal.survey.surveyportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755875233187-hc3q32gat7u941hkrbg2jv2hb8u1dec2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.creedglobal.survey.surveyportal",
+            "certificate_hash": "27BFD6E018ACD36D13F3A224F36AB06160FADEEB"
+          }
+        },
+        {
+          "client_id": "755875233187-v8fini5eocv9hc9ipiifbdekk1c9tmhm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.creedglobal.survey.surveyportal",
+            "certificate_hash": "B914ECCC69F4AF830947E333028E19E5F59E4174"
+          }
+        },
+        {
+          "client_id": "755875233187-jcucigahnlc25ch0vr30ovbp92p2t1t8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABf5zE5tKTHLtzXmz82UsVsAbg0IYOk3U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755875233187-jcucigahnlc25ch0vr30ovbp92p2t1t8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

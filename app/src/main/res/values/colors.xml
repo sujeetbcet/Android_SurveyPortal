@@ -5,13 +5,21 @@
     <color name="white">#ffffff</color>
     <color name="fbprimary">#6593f0</color>
     <color name="fbprimarydark">#2b5bba</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff4081</color>
     <color name="selected">#c8f1088c</color>
     <color name="unselected">#70000000</color>
     <color name="background">#b3a6ced2</color>
     <color name="actionbar">#76c5cc</color>
     <color name="background1">#80D8FF</color>
     <color name="actionbar1">#40C4FF</color>
+
+    <color name="primary">#7008b6</color>
+    <color name="primaryDark">#500395</color>
+    <color name="primaryAccent">#ff4081</color>
+    <color name="primaryToolbar">#0c8395</color>
+    <color name="primaryBackground">#FFFFFF</color>
+
+
     <color name="White">#ffffff</color>
     <color name="Ivory">#FFFFF0</color>
     <color name="LightYellow">#FFFFE0</color>

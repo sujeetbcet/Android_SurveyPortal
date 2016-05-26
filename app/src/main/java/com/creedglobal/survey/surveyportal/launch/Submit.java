@@ -47,7 +47,7 @@ public class Submit extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),SurveyLauncher.class);
 //                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finishAffinity();
+//                finishAffinity();
             }
             else {
                 Toast.makeText(getApplicationContext(),"ops...! something went wrong",Toast.LENGTH_SHORT).show();
